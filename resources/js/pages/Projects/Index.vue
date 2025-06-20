@@ -1,24 +1,29 @@
-<script setup>
-import { router } from '@inertiajs/vue3'
+<script setup lang="ts">
+import { router, Link } from '@inertiajs/vue3'
+import Swal from 'sweetalert2'
 import AppLayout from '@/Layouts/AppLayout.vue'
 
 defineProps({
   projects: Array
 })
 
-const deleteProject = ( id) => {
-  if (confirm('¿Estás seguro de eliminar este proyecto?')) {
-    router.delete(route('projects.destroy', id), {
-      onSuccess: () => {
-        
-        console.log('Proyecto eliminado con éxito');
-      },
-      onError: (error) => {
-        
-        console.error('Error al eliminar el proyecto:', error);
-      }
-    })
-  }
+const destroy = (id: number) => {
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: 'Esta acción eliminará el proyecto permanentemente.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      router.delete(`/projects/${id}`, {
+        onSuccess: () => {
+          Swal.fire('¡Eliminado!', 'El proyecto ha sido eliminado.', 'success')
+        }
+      })
+    }
+  })
 }
 </script>
 
@@ -49,8 +54,10 @@ const deleteProject = ( id) => {
             <td class="px-4 py-2">{{ project.end_date }}</td>
             <td class="px-4 py-2">{{ project.status }}</td>
             <td class="px-4 py-2 space-x-2">
-              <a :href="`/projects/${project.id}/edit`" class="text-blue-600 hover:underline">Editar</a>
-              <button @click="deleteProject(project.id)" class="text-red-600 hover:underline">Eliminar</button>
+              <Link :href="`/projects/${project.id}/edit`" class="text-blue-600 hover:underline">
+              Editar
+              </Link>
+              <button @click="destroy(project.id)" class="text-red-600 hover:underline">Eliminar</button>
             </td>
           </tr>
         </tbody>
