@@ -15,6 +15,11 @@ class User extends Authenticatable
 
     use HasRoles;
 
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
