@@ -4,22 +4,33 @@ import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/vue3';
-import {  Folder, LayoutGrid } from 'lucide-vue-next';
+import { Link, usePage } from '@inertiajs/vue3';
+import {  Folder, LayoutGrid, Users  } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
+
+
+const { userRole } = usePage().props;
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: 'Inicio',
         href: '/dashboard',
         icon: LayoutGrid,
     },
 ];
 
+const adminNavItems = userRole === 'Admin' ? [
+    {
+        title: 'Usuarios',
+        href: '/users',
+        icon: Users,
+    }
+] : [];
+
 const footerNavItems: NavItem[] = [
     {
         title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
+        href: 'https://github.com/alfonsonadamas/project-manager',
         icon: Folder,
     },
 ];
@@ -32,7 +43,7 @@ const footerNavItems: NavItem[] = [
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" as-child>
                         <Link href="/dashboard">
-                            <AppLogo />
+                        <AppLogo />
                         </Link>
                     </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -41,6 +52,8 @@ const footerNavItems: NavItem[] = [
 
         <SidebarContent>
             <NavMain :items="mainNavItems" />
+            <NavMain :items="adminNavItems" v-if="userRole === 'Admin'" />
+            
         </SidebarContent>
 
         <SidebarFooter>

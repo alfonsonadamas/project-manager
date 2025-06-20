@@ -30,9 +30,9 @@ const destroy = (id: number) => {
 
 <template>
   <AppLayout title="Proyectos">
-    <div class="flex justify-between items-center mb-6 mx-10">
+    <div class="flex justify-between items-center mb-6 mx-10 max-sm:flex-col mt-10">
       <h1 class="text-2xl font-bold">Listado de Proyectos</h1>
-      <Link v-if="userRole === 'Admin'" :href="'/projects/create'" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">
+      <Link v-if="userRole === 'Admin'" :href="'/projects/create'" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded max-sm:w-full max-sm:mb-4 max-sm:text-center max-sm:mt-10">
       + Nuevo Proyecto
       </Link>
     </div>

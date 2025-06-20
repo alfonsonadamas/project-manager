@@ -3,6 +3,11 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
 
+const props = defineProps({
+    userRole: String, // Recibimos el rol del usuario
+});
+
+console.log(props)
 
 const breadcrumbs: BreadcrumbItem[] = [
     {

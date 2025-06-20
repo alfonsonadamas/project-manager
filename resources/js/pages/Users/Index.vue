@@ -47,7 +47,9 @@ const deleteUser = (id: number) => {
                         <td class="px-4 py-2">{{ user.email }}</td>
                         <td class="px-4 py-2">{{ user.role.name }}</td>
                         <td class="px-4 py-2">
-                            <Link :href="`/users/${user.id}/edit`" class="text-blue-600 hover:underline mr-10">Editar</Link>
+                            <Link :href="`/users/${user.id}`" class="text-green-600 hover:underline mr-5">Ver</Link>
+                            <Link :href="`/users/${user.id}/edit`" class="text-blue-600 hover:underline mr-5">Editar
+                            </Link>
                             <button @click="deleteUser(user.id)" class="text-red-600 hover:underline">Eliminar</button>
                         </td>
                     </tr>

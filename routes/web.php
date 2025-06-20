@@ -25,6 +25,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit'); // Editar usuario
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update'); // Actualizar usuario
     Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy'); // Eliminar usuario
+    Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');// Ver detalles de usuario
+    Route::put('users/{user}/assign-projects', [UserController::class, 'assignProjects'])->name('users.assignProjects'); // Asignar proyectos a usuario
+    Route::put('users/{user}/remove-project', [UserController::class, 'removeProject'])->name('users.removeProject');// Eliminar proyecto asignado a usuario
+    
 });
 
 

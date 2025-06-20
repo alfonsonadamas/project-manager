@@ -2,6 +2,7 @@
 import { reactive } from 'vue'
 import { router } from '@inertiajs/vue3'
 import AppLayout from '@/Layouts/AppLayout.vue'
+import Swal from 'sweetalert2'
 
 const props = defineProps({
     user: Object,
