@@ -25,6 +25,11 @@ class User extends Authenticatable
         return $this->hasMany(Task::class, 'assigned_to');
     }
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class); 
+    }
+
     /**
      * The attributes that are mass assignable.
      *

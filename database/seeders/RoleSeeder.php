@@ -21,6 +21,7 @@ class RoleSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@example.com',
             'password' => bcrypt('password'),
+            'role_id' => 1,
         ]);
 
         $admin->assignRole('Admin');
@@ -29,6 +30,7 @@ class RoleSeeder extends Seeder
             'name' => 'Colab',
             'email' => 'colab@example.com',
             'password' => bcrypt('password'),
+            'role_id' => 2,
         ]);
         $user->assignRole('Colaborador');
     }

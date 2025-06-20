@@ -5,15 +5,39 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class ProjectController extends Controller
 {
+
     public function index(){
-        $projects = Project::with('users')->get();
+        $user = Auth::user();
+        $role = $user->role->name;
+
+    
+        if($user->role_id === 1) {
+            $projects = Project::all();
+        }else {
+        
+            $projects = $user->projects;
+        }
 
         return Inertia::render('Projects/Index', [
-            'projects' => $projects
+            'projects' => $projects,
+            'userRole' => $role,
+        ]);
+    }
+
+    public function show(Project $project)
+    {
+        $user = Auth::user();
+        $role = $user->role->name;
+        $project->load(['tasks', 'tasks.assignedUser']);
+        
+        return Inertia::render('Projects/Show', [
+            'project' => $project,
+            'userRole' => $role,
         ]);
     }
 
