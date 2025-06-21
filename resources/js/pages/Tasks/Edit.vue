@@ -3,6 +3,9 @@ import { reactive } from 'vue'
 import { router } from '@inertiajs/vue3'
 import AppLayout from '@/Layouts/AppLayout.vue'
 import Swal from 'sweetalert2'
+import { usePage } from '@inertiajs/vue3'
+
+const { userRole } = usePage().props;
 
 const props = defineProps({
     project: Object,
@@ -15,7 +18,7 @@ const form = reactive({
     description: props.task.description,
     priority: props.task.priority,
     due_date: props.task.due_date,
-    status: props.task.status,
+    status: props.task.status,  // El estado de la tarea se asigna desde la tarea
     assigned_to: props.task.assigned_to,
     errors: {}
 })
@@ -45,20 +48,23 @@ const submit = () => {
 
                 <div>
                     <label class="block mb-1">Título</label>
-                    <input v-model="form.title" type="text" class="w-full border p-2 rounded" />
+                    <input :disabled="userRole !== 'Admin'" v-model="form.title" type="text"
+                        class="w-full border p-2 rounded disabled:opacity-25" />
                     <span class="text-red-500 text-sm">{{ form.errors.title }}</span>
                 </div>
 
                 <div>
                     <label class="block mb-1">Descripción</label>
-                    <textarea v-model="form.description" class="w-full border p-2 rounded"></textarea>
+                    <textarea :disabled="userRole !== 'Admin'" v-model="form.description"
+                        class="w-full border p-2 rounded disabled:opacity-25"></textarea>
                     <span class="text-red-500 text-sm">{{ form.errors.description }}</span>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block mb-1">Prioridad</label>
-                        <select v-model="form.priority" class="w-full border p-2 rounded">
+                        <select v-model="form.priority" :disabled="userRole !== 'Admin'"
+                            class="w-full border p-2 rounded disabled:opacity-25">
                             <option value="Alta">Alta</option>
                             <option value="Media">Media</option>
                             <option value="Baja">Baja</option>
@@ -68,14 +74,26 @@ const submit = () => {
 
                     <div>
                         <label class="block mb-1">Fecha de entrega</label>
-                        <input v-model="form.due_date" type="date" class="w-full border p-2 rounded" />
+                        <input :disabled="userRole !== 'Admin'" v-model="form.due_date" type="date"
+                            class="w-full border p-2 rounded disabled:opacity-25" />
                         <span class="text-red-500 text-sm">{{ form.errors.due_date }}</span>
                     </div>
                 </div>
 
                 <div>
+                    <label class="block mb-1">Estado</label>
+                    <select v-model="form.status" class="w-full border p-2 rounded">
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="En progreso">En progreso</option>
+                        <option value="Hecha">Hecha</option>
+                    </select>
+                    <span class="text-red-500 text-sm">{{ form.errors.status }}</span>
+                </div>
+
+                <div>
                     <label class="block mb-1">Asignar a</label>
-                    <select v-model="form.assigned_to" class="w-full border p-2 rounded">
+                    <select :disabled="userRole !== 'Admin'" v-model="form.assigned_to"
+                        class="w-full border p-2 rounded disabled:opacity-25">
                         <option value="">-- Selecciona un usuario --</option>
                         <option v-for="user in users" :key="user.id" :value="user.id">
                             {{ user.name }}
