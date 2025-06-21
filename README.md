@@ -1,25 +1,151 @@
-# Laravel + Vue Starter Kit
 
-## Introduction
+# Proyecto de Gestión de Tareas y Proyectos
 
-Our Vue starter kit provides a robust, modern starting point for building Laravel applications with a Vue frontend using [Inertia](https://inertiajs.com).
+Este proyecto es una aplicación web para gestionar proyectos, tareas y usuarios. Está desarrollado utilizando **Laravel** para el backend y **Vue.js** con **Inertia.js** para el frontend.
 
-Inertia allows you to build modern, single-page Vue applications using classic server-side routing and controllers. This lets you enjoy the frontend power of Vue combined with the incredible backend productivity of Laravel and lightning-fast Vite compilation.
+## Requisitos Previos
 
-This Vue starter kit utilizes Vue 3 and the Composition API, TypeScript, Tailwind, and the [shadcn-vue](https://www.shadcn-vue.com) component library.
+Antes de comenzar, asegúrate de tener instalados los siguientes programas en tu entorno:
 
-## Official Documentation
+- PHP 8.1 o superior
+- Composer
+- Node.js y npm
+- MySQL o cualquier base de datos compatible con Laravel
 
-Documentation for all Laravel starter kits can be found on the [Laravel website](https://laravel.com/docs/starter-kits).
+## Configuración del Entorno
 
-## Contributing
+1. Copia el archivo `.env.example` a un nuevo archivo `.env`:
 
-Thank you for considering contributing to our starter kit! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+cp .env.example .env
+```
 
-## Code of Conduct
+## Configuración de la Base de Datos
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Asegúrate de que tu base de datos esté configurada en el archivo `.env`. Actualiza las siguientes variables con los detalles de tu base de datos:
 
-## License
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nombre_de_tu_base_de_datos
+DB_USERNAME=usuario
+DB_PASSWORD=contraseña
+```
 
-The Laravel + Vue starter kit is open-sourced software licensed under the MIT license.
+## Instalación de Dependencias
+
+### Dependencias de PHP
+
+Ejecuta el siguiente comando para instalar las dependencias de PHP:
+
+```bash
+composer install
+```
+
+### Dependencias de JavaScript
+
+Ejecuta el siguiente comando para instalar las dependencias de JavaScript:
+
+```bash
+npm install
+```
+
+## Generar la Clave de la Aplicación
+
+Genera una clave para la aplicación Laravel:
+
+```bash
+php artisan key:generate
+```
+
+## Migrar la Base de Datos
+
+Ejecuta las migraciones para crear las tablas necesarias en la base de datos:
+
+```bash
+php artisan migrate
+```
+
+Si necesitas datos de prueba, puedes ejecutar el seeder:
+
+```bash
+php artisan db:seed
+```
+
+## Ejecutar el Servidor
+
+Finalmente, puedes ejecutar el servidor de desarrollo de Laravel:
+
+```bash
+php artisan serve
+```
+
+El servidor estará disponible en [http://127.0.0.1:8000](http://127.0.0.1:8000).
+
+## Ejecutar el Frontend
+
+Para el frontend, ejecuta el siguiente comando para iniciar el servidor de desarrollo de Vue.js con Vite:
+
+```bash
+npm run dev
+```
+
+Este comando iniciará un servidor de desarrollo en [http://localhost:3000](http://localhost:3000).
+
+## Funcionalidades
+
+El sistema tiene las siguientes funcionalidades:
+
+### 1. Gestión de Proyectos
+
+- Listar proyectos.
+- Crear nuevos proyectos.
+- Editar proyectos existentes.
+- Eliminar proyectos.
+
+### 2. Gestión de Tareas
+
+- Listar tareas.
+- Crear nuevas tareas.
+- Editar tareas existentes.
+- Eliminar tareas.
+- Asignar tareas a usuarios.
+
+### 3. Gestión de Usuarios
+
+- Listar usuarios.
+- Ver detalles de un usuario y asignar proyectos.
+- Asignar y quitar proyectos a usuarios.
+
+### 4. Roles y Permisos
+
+- **Administrador (Admin)**: Puede crear, editar y eliminar proyectos, tareas y usuarios. También puede asignar proyectos a los usuarios.
+- **Colaborador (User)**: Puede ver y actualizar tareas asignadas a él.
+
+### 5. Autenticación
+
+- Los usuarios pueden registrarse, iniciar sesión y gestionar sus tareas y proyectos asignados.
+- Los administradores tienen acceso completo a todas las funcionalidades.
+
+## Estructura del Proyecto
+
+### Backend (Laravel)
+
+- `app/`: Contiene la lógica del backend (controladores, modelos, etc.).
+- `database/migrations/`: Migraciones para crear las tablas de la base de datos.
+- `routes/web.php`: Rutas del backend para manejar las solicitudes HTTP.
+- `.env`: Configuración del entorno (base de datos, correo, etc.).
+
+### Frontend (Vue.js + Inertia.js)
+
+- `resources/js/`: Contiene el frontend en Vue 3.
+  - `components/`: Componentes reutilizables.
+  - `views/`: Vistas (páginas) principales del proyecto.
+  - `resources/js/Layouts/`: Layouts que se utilizan en las vistas.
+  - `resources/js/app.js`: Punto de entrada principal del frontend.
+
+
+
+
+
