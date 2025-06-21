@@ -31,21 +31,21 @@ const deleteTask = (taskId: number) => {
 
 <template>
     <AppLayout :title="`Proyecto: ${project.name}`">
-        <div class="max-w-5xl mx-auto mt-10 ">
+        <div class="max-w-5xl max-sm:w-full mx-auto mt-10 max-sm:px-4">
             <h1 class="text-3xl font-bold mb-4">Proyecto: {{ project.name }}</h1>
             <p class="mb-2"><strong>Descripción:</strong> {{ project.description }}</p>
             <p><strong>Fechas:</strong> {{ project.start_date }} → {{ project.end_date }}</p>
             <p class="mb-4"><strong>Estado:</strong> {{ project.status }}</p>
 
-            <div class="flex justify-between items-center mb-4">
+            <div class="flex justify-between items-center mb-4 max-sm:flex-col">
                 <h2 class="text-xl font-semibold">Tareas</h2>
                 <Link v-if="userRole === 'Admin'" :href="`/projects/${project.id}/tasks/create`"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded max-sm:w-full text-center max-sm:my-5">
                 + Nueva Tarea
                 </Link>
             </div>
 
-            <table class="w-full table-auto bg-white shadow rounded text-black">
+            <table class="w-full table-auto bg-white shadow rounded text-black overflow-x-auto">
                 <thead class="bg-gray-100">
                     <tr>
                         <th class="px-4 py-2">Título</th>
@@ -61,7 +61,7 @@ const deleteTask = (taskId: number) => {
                         <td class="px-4 py-2">{{ task.priority }}</td>
                         <td class="px-4 py-2">{{ task.status }}</td>
                         <td class="px-4 py-2">{{ task.assigned_user?.name ?? '—' }}</td>
-                        <td  class="px-4 py-2 text-right space-x-2">
+                        <td  class="px-4 py-2 text-right space-x-2 max-sm:flex max-sm:flex-col max-sm:items-start">
                             <Link :href="`/projects/${project.id}/tasks/${task.id}/edit`"
                                 class="text-blue-600 hover:underline">
                             Editar
