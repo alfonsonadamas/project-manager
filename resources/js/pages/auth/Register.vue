@@ -13,6 +13,9 @@ const form = useForm({
     email: '',
     password: '',
     password_confirmation: '',
+    remember: false,
+    _method: 'POST',
+    role_id: 2,
 });
 
 const submit = () => {
